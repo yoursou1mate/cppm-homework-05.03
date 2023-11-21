@@ -18,43 +18,25 @@ public:
     Figure (int sides_count){};
     
     
-   virtual void get_sides_count ()
+   virtual std::string get_sides_count ()
     {
-        std::cout << "Number of sides: " << sides_count << std::endl;
+       std::string show_sides = "Number of sides: " + std::to_string(sides_count);
+       return show_sides;
     }
     
-   virtual void get_name ()
+   virtual std::string get_name ()
     {
-        std::cout << name << ": " << std::endl;
+        std::string show_name = name + ": ";
+       return show_name;
     }
-    
-//    void get_sides ()
-//    {
-//        std::cout << "a=" << a << " b=" << b << " c=" << c << std::endl;
-//    }
-//
-//    void get_angles ()
-//    {
-//        std::cout << "A=" << A << " B=" << B << " C=" << C << std::endl;
-//    }
-//
-    
-//    void print_info ()
-//    {
-//        std::cout << "Sides: ";
-//        get_sides();
-//        std::cout << "Angles: ";
-//        get_angles();
-//    }
+
     
     virtual bool check ()
     {
      if (sides_count == 0)
      {
-         std::cout << "Correct" << std::endl;
          return true;
      } else {
-         std::cout << "Incorrect" << std::endl;
          return false;
      }
     }
@@ -85,44 +67,54 @@ public:
         this->C = C;
     }
     
-    void get_sides ()
+    std::string get_sides ()
     {
-      std::cout << "a=" << a << " b=" << b << " c=" << c << std::endl;
+        std::string all_sides = "a=" + std::to_string(a) + " b=" + std::to_string(b) + " c=" + std::to_string(c);
+        return all_sides;
     }
     
-    void get_angles ()
+    std::string get_angles ()
     {
-      std::cout << "A=" << A << " B=" << B << " C=" << C << std::endl;
+        std::string all_angles = "A=" + std::to_string(A) + " B=" + std::to_string(B) + " C=" + std::to_string(C);
+        return all_angles;
     }
     
-    void get_name () override
+    std::string get_name () override
      {
-         std::cout << name << ": " << std::endl;
+         std::string show_name = name + ": ";
+        return show_name;
      }
     
-    void get_sides_count () override
+    std::string get_sides_count () override
      {
-         std::cout << "Number of sides: " << sides_count << std::endl;
+         std::string show_sides = "Number of sides: " + std::to_string(sides_count);
+         return show_sides;
      }
     
     bool check () override
     {
      if (sides_count == 3 && A + B + C == 180)
      {
-         std::cout << "Correct" << std::endl;
          return true;
      } else {
-         std::cout << "Incorrect" << std::endl;
          return false;
      }
     }
     
     void print_info ()
     {
+        std::cout << get_name() << std::endl;
+        if(check () == true)
+        {
+            std::cout << "Correct" << std::endl;
+        } else
+        {
+            std::cout << "Incorrect" << std::endl;
+        }
         std::cout << "Sides: ";
-        get_sides();
+        std::cout << get_sides() << std::endl;
         std::cout << "Angles: ";
-        get_angles();
+        std::cout << get_angles() << std::endl;
     }
 };
 
@@ -130,29 +122,28 @@ class Right_triangle : public Triangle
 {
 private:
     int sides_count = 3;
-    int C = 90;
     std::string name = "Right triangle";
 public:
-    Right_triangle (int a, int b, int c, int A, int B) : Triangle (a, b, c, A, B, Right_triangle::C = 90){};
+    Right_triangle (int a, int b, int c, int A, int B) : Triangle (a, b, c, A, B, C = 90){};
     
-    void get_name () override
-    {
-        std::cout << name << ": " << std::endl;
-    }
+    std::string get_name () override
+     {
+         std::string show_name = name + ": ";
+        return show_name;
+     }
     
-    void get_sides_count () override
-    {
-        std::cout << "Number of sides: " << sides_count << std::endl;
-    }
+    std::string get_sides_count () override
+     {
+         std::string show_sides = "Number of sides: " + std::to_string(sides_count);
+         return show_sides;
+     }
     
     bool check () override
     {
-        if (C == 90)
+        if (Triangle::check() == true && C == 90)
         {
-            std::cout << "Correct" << std::endl;
             return true;
         } else {
-            std::cout << "Incorrect" << std::endl;
             return false;
         }
     }
@@ -164,26 +155,26 @@ private:
     int sides_ccount = 3;
     std::string name = "Isosceles triangle";
 public:
-    Isosceles_triangle (int a, int b, int A, int B) : Triangle (a, b, c = a, A, B, C = A ){};
+    Isosceles_triangle (int a, int b, int A, int B) : Triangle (a, b, a, A, B, A ){};
     
-    void get_name () override
-    {
-        std::cout << name << ": " << std::endl;
-    }
+    std::string get_name () override
+     {
+         std::string show_name = name + ": ";
+        return show_name;
+     }
     
-    void get_sides_count () override
-    {
-        std::cout << "Number of sides: " << sides_count << std::endl;
-    }
+    std::string get_sides_count () override
+     {
+         std::string show_sides = "Number of sides: " + std::to_string(sides_count);
+         return show_sides;
+     }
     
     bool check () override
     {
-        if (sides_count == 3 && a == c && A == C)
+        if (Triangle::check() == true && a == c && A == C)
         {
-            std::cout << "Correct" << std::endl;
             return true;
         } else {
-            std::cout << "Incorrect" << std::endl;
             return false;
         }
     }
@@ -193,30 +184,29 @@ class Equilateral_triangle : public Triangle
 {
 private:
     int sides_count = 3;
-    int A  = 60;
     std::string name = "Equilateral triangle";
 public:
-    Equilateral_triangle (int a) : Triangle (a, b = a, c = a, Equilateral_triangle::A = 60, B = A, C = A){};
+    Equilateral_triangle (int a) : Triangle (a, a, a, A = 60, A, A){};
     
-    void get_name () override
-    {
-        std::cout << name << ": " << std::endl;
-    }
+    std::string get_name () override
+     {
+         std::string show_name = name + ": ";
+        return show_name;
+     }
     
-    void get_sides_count () override
-    {
-        std::cout << "Number of sides: " << sides_count << std::endl;
-    }
+    std::string get_sides_count () override
+     {
+         std::string show_sides = "Number of sides: " + std::to_string(sides_count);
+         return show_sides;
+     }
     
     bool check () override
     {
-        if (sides_count == 3 && a ==  45 && b == 45 && c == 45 && A  == 60 && B == 60 & C == 60)
+        if (Triangle::check() == true && a ==  45 && b == 45 && c == 45 && A  == 60 && B == 60 & C == 60)
         {
-            std::cout << "Correct" << std::endl;
             return true;
         } else
         {
-            std::cout << "Incorrect" << std::endl;
             return false;
         }
     }
@@ -251,45 +241,56 @@ public:
         this->D = D;
     }
     
-    void get_name () override
-    {
-        std::cout << name << ": " << std::endl;
-    }
+    std::string get_name () override
+     {
+         std::string show_name = name + ": ";
+        return show_name;
+     }
     
-    void get_sides_count () override
-    {
-        std::cout << "Number of sides: " << sides_count << std::endl;
-    }
+    std::string get_sides_count () override
+     {
+         std::string show_sides = "Number of sides: " + std::to_string(sides_count);
+         return show_sides;
+     }
     
     bool check () override
     {
         if (sides_count == 4 && A + B + C + D == 360)
         {
-            std::cout << "Correct" << std::endl;
             return true;
         } else
         {
-            std::cout << "Incorrect" << std::endl;
             return false;
         }
     }
     
-    void get_sides ()
+    std::string get_sides ()
     {
-      std::cout << "a=" << a << " b=" << b << " c=" << c << " d=" << d << std::endl;
+        std::string all_sides = "a=" + std::to_string(a) + " b=" + std::to_string(b) + " c=" + std::to_string(c) + " d=" + std::to_string(d);
+        return all_sides;
     }
     
-    void get_angles ()
+    std::string get_angles ()
     {
-      std::cout << "A=" << A << " B=" << B << " C=" << C << " D=" << D << std::endl;
+        std::string all_angles = "A=" + std::to_string(A) + " B=" + std::to_string(B) + " C=" + std::to_string(C) + " D=" + std::to_string(D);
+        return all_angles;
     }
     
     void print_info ()
     {
+        std::cout << get_name() << std::endl;
+        if (check () == true)
+        {
+            std::cout << "Correct" << std::endl;
+        }
+        else
+        {
+            std::cout << "Incorrect" << std::endl;
+        }
         std::cout << "Sides: ";
-        get_sides();
+        std::cout << get_sides() << std::endl;;
         std::cout << "Angles: ";
-        get_angles();
+        std::cout << get_angles() << std::endl;
     }
 };
 
@@ -299,27 +300,27 @@ private:
     int sides_count = 4;
     std::string name = "Rectangle";
 public:
-    Rectangle (int a, int b) : Quadrilateral (a, b, c = a, d = b, A = 90, B = A, C = A, D = A){};
+    Rectangle (int a, int b) : Quadrilateral (a, b, a, b, A = 90, A, A, A){};
     
-    void get_name () override
-    {
-        std::cout << name << ": " << std::endl;
-    }
+    std::string get_name () override
+     {
+         std::string show_name = name + ": ";
+        return show_name;
+     }
     
-    void get_sides_count () override
-    {
-        std::cout << "Number of sides: " << sides_count << std::endl;
-    }
+    std::string get_sides_count () override
+     {
+         std::string show_sides = "Number of sides: " + std::to_string(sides_count);
+         return show_sides;
+     }
     
     bool check () override
     {
-        if (sides_count == 4 && a == c && b == d && A == 90, B == 90, C == 90, D == 90)
+        if (Quadrilateral::check() == true && a == c && b == d && A == 90 && B == 90 && C == 90 && D == 90)
         {
-            std::cout << "Correct" << std::endl;
             return true;
         } else
         {
-            std::cout << "Incorrect" << std::endl;
             return false;
         }
     }
@@ -334,25 +335,25 @@ private:
 public:
     Square (int a) : Rectangle (a, b = a){};
     
-    void get_name () override
-    {
-        std::cout << name << ": " << std::endl;
-    }
+    std::string get_name () override
+     {
+         std::string show_name = name + ": ";
+        return show_name;
+     }
     
-    void get_sides_count () override
-    {
-        std::cout << "Number of sides: " << sides_count << std::endl;
-    }
+    std::string get_sides_count () override
+     {
+         std::string show_sides = "Number of sides: " + std::to_string(sides_count);
+         return show_sides;
+     }
     
     bool check () override
     {
-        if (sides_count == 4 && a == c, c == b, a == d, b == d && A == 90, B == 90, C == 90, D == 90)
+        if (Rectangle::check() == true && a == c && c == b && a == d && b == d && A == 90 && B == 90 && C == 90 && D == 90)
         {
-            std::cout << "Correct" << std::endl;
             return true;
         } else
         {
-            std::cout << "Incorrect" << std::endl;
             return false;
         }
     }
@@ -364,27 +365,27 @@ private:
     int sides_count = 4;
     std::string name = "Parallelogram";
 public:
-    Parallelogram (int a, int b, int A, int B) : Quadrilateral (a, b, c = a, d = b, A, B, C = A, D = B){}
+    Parallelogram (int a, int b, int A, int B) : Quadrilateral (a, b, a, b, A, B, A, B){}
     
-    void get_name () override
-    {
-        std::cout << name << ": " << std::endl;
-    }
+    std::string get_name () override
+     {
+         std::string show_name = name + ": ";
+        return show_name;
+     }
     
-    void get_sides_count () override
-    {
-        std::cout << "Number of sides: " << sides_count << std::endl;
-    }
+    std::string get_sides_count () override
+     {
+         std::string show_sides = "Number of sides: " + std::to_string(sides_count);
+         return show_sides;
+     }
     
     bool check () override
     {
-        if (sides_count == 4 && a == c, b == d && A == C & B == D)
+        if (Quadrilateral::check() == true && a == c && b == d && A == C & B == D)
         {
-            std::cout << "Correct" << std::endl;
             return true;
         } else
         {
-            std::cout << "Incorrect" << std::endl;
             return false;
         }
     }
@@ -396,27 +397,27 @@ private:
     int sides_count = 4;
     std::string name = "Rhomb";
 public:
-    Rhomb (int a, int A, int B) : Parallelogram (a, b = a, A, B){}
+    Rhomb (int a, int A, int B) : Parallelogram (a, a, A, B){}
     
-    void get_name () override
-    {
-        std::cout << name << ": " << std::endl;
-    }
+    std::string get_name () override
+     {
+         std::string show_name = name + ": ";
+        return show_name;
+     }
     
-    void get_sides_count () override
-    {
-        std::cout << "Number of sides: " << sides_count << std::endl;
-    }
+    std::string get_sides_count () override
+     {
+         std::string show_sides = "Number of sides: " + std::to_string(sides_count);
+         return show_sides;
+     }
     
     bool check () override
     {
-        if (sides_count == 4 && a == c, c == b, a == d, b == d && A == C & B == D)
+        if (Parallelogram::check() == true && a == c && c == b && a == d && b == d && A == C & B == D)
         {
-            std::cout << "Correct" << std::endl;
             return true;
         } else
         {
-            std::cout << "Incorrect" << std::endl;
             return false;
         }
     }
