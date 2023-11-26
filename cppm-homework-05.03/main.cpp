@@ -124,7 +124,7 @@ private:
     int sides_count = 3;
     std::string name = "Right triangle";
 public:
-    Right_triangle (int a, int b, int c, int A, int B) : Triangle (a, b, c, A, B, C = 90){};
+    Right_triangle (int a, int b, int c, int A, int B) : Triangle (a, b, c, A, B, 90){};
     
     std::string get_name () override
      {
@@ -186,7 +186,7 @@ private:
     int sides_count = 3;
     std::string name = "Equilateral triangle";
 public:
-    Equilateral_triangle (int a) : Triangle (a, a, a, A = 60, A, A){};
+    Equilateral_triangle (int a) : Triangle (a, a, a, 60, 60, 60){};
     
     std::string get_name () override
      {
@@ -300,7 +300,7 @@ private:
     int sides_count = 4;
     std::string name = "Rectangle";
 public:
-    Rectangle (int a, int b) : Quadrilateral (a, b, a, b, A = 90, A, A, A){};
+    Rectangle (int a, int b) : Quadrilateral (a, b, a, b, 90, 90, 90, 90){};
     
     std::string get_name () override
      {
@@ -333,7 +333,7 @@ private:
     int sides_count = 4;
     std::string name = "Square";
 public:
-    Square (int a) : Rectangle (a, b = a){};
+    Square (int a) : Rectangle (a, a){};
     
     std::string get_name () override
      {
